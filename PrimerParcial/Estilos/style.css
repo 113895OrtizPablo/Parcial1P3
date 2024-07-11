@@ -1,0 +1,16 @@
+#titulo{
+    color: hwb(263 9% 19%);
+    margin-left: 3em;
+}
+.form-control{
+    color: hwb(263 9% 19%);
+}
+.form-control::placeholder {
+    color: hwb(212 33% 16%);
+  }
+
+
+.btn{
+    background-color:  hwb(263 9% 19%);
+    color: white;
+}

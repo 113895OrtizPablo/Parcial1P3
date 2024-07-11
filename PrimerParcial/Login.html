@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        label.is-invalid {
+            color: red;
+        }
+
+        input.is-invalid {
+            border: 1px solid red;
+        }
+
+        input.is-valid {
+            border: 1px solid green;
+        }
+    </style>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+     <!-- jquery validate -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+
+    <script>
+
+        function CrearUsuario(email, pass){
+            this.email = email;
+            this.pass = pass;
+        }
+        
+
+        let Usuario = new CrearUsuario("alumnotup@frc.utn.edu.ar","123456");
+
+        $(document).ready(function () {
+            $("#save").click(function () {
+                if ($("#form-register").valid()) {
+                    alert("Buscando cuenta..."); 
+                }
+                else {
+                    alert("hay errores");
+                }
+            })
+            $("#form-register").validate({
+                rules: {
+                    inputEmail: {
+                        required: true,
+                        email: true
+                    },
+                    inputPassword: {
+                        required: true,
+                        minlength: 6
+                    }
+                },
+                messages: {
+                    inputEmail: {
+                        required: "Este campo es requerido",
+                        email: "Debe ingresar un email valido"
+                    },
+                    inputPassword: {
+                        required: "Este campo es requerido",
+                        minlength:jQuery.validator.format("No debe tener menos de {0} caracteres.")  
+                    }
+                },
+                submitHandler: function(form){
+                    if($("#inputEmail").val() == "alumnotup@frc.utn.edu.ar" && $("#inputPassword").val() == "123456"){
+                        localStorage.setItem("Usuario", JSON.stringify(Usuario));
+                        form.submit();
+                    }
+                    else{
+                        alert("No existe un mail con esa contraseña")
+                    }
+                },
+                errorClass: "is-invalid",
+                validClass: "is-valid",
+                debug: false
+                
+            })
+        });
+    </script>
+    <title>Login</title>
+  </head>
+  <body>
+    <header class="bg-primary">
+        <h1 class="col-sm-12 text-center">Login</h1>
+        <hr>
+    </header>
+    <main>
+        <div class="container col-md-4 rounded-3 pt-5 pb-5 " id="Formulario">
+            <div class="col-md-12 text-center">
+                 <img alt="Icono Clave Fiscal" src="Imagenes/boton-candado.svg" style="width: 24px;vertical-align: sub; margin-right: 10px;" />Ingresar con Email</legend>
+            </div>
+            <div class="content mb-3 mt-3">
+             <form action="Form.html" id="form-register">
+                 <div class="mb-3">
+                   <label for="inputEmail" class="form-label text-start">Ingrese su email: </label>
+                   <input type="email" class="form-control" id="inputEmail" name="inputEmail">
+                 </div>
+                 <div class="mb-3">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Password: </label>
+                    <input type="password" class="form-control" id="inputPassword" name="inputPassword">   
+                </div>
+                 <button type="submit" class="btn btn-primary col-md-12" id="save">Ingresar</button>
+             </form>
+            </div>
+         </div>
+    </main>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+    <!-- SweetALert -->    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/dist/sweetalert2.all.min.js"></script>
+    <!-- Archivo local Js --> 
+    <script src="Js/Login.js"></script>
+  </body>
+</html>
+
